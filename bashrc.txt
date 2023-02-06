@@ -1,0 +1,30 @@
+# add following at the end of your .bashrc
+
+# customized PS1
+
+function parse_git_branch() {
+    # Parse the current git branch name and print it
+    which git &>/dev/null || return
+    local branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+    [[ -n $branch ]] && echo " [${branch}]"
+}
+
+function set_PS1 {
+    # The built-in PS1 variable defines the format of the user's shell
+    # prompt. This version displays:
+    #   - date/time (\D{})
+    #   - current directory (\w)
+    #   - current git branch (parse_git_branch)
+    #   - user name (\u)
+    #   - host machine (\h)
+    # See also: `man bash`.
+    PS1='\[\e[1;33m\]\D{%b-%d %H:%M:%S}\[\e[0m\] \[\e[1;35m\]\w \[\e[0m\]$(parse_git_branch)\[\e[1;36m\][\u.\h]\[\e[0m\]$Ps1Tail \$ '
+}
+
+set_PS1 # Set the prompt to something more useful than the default
+
+# setup for juyterlab terminal
+if [ -n "$JUPYTERLAB_SHELL_ENV" ]; then
+  source ~/miniconda3/etc/profile.d/conda.sh
+  conda activate $JUPYTERLAB_SHELL_ENV
+fi

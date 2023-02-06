@@ -1,0 +1,9 @@
+jupyterlab
+ipywidgets
+ipykernel
+widgetsnbextension
+pandas-profiling
+jupyterlab-spellchecker
+jupyterlab-code-formatter
+black
+isort

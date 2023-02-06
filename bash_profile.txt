@@ -1,0 +1,9 @@
+# add the following at the end of your .bash_profile
+
+# customized ENV VAR
+export WORK='/mnt/d/Projects'
+
+# customized alias
+alias cd=pushd
+alias start="cd $WORK && ./config_env.sh"
+alias show="explorer.exe ."
